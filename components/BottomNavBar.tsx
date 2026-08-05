@@ -2,12 +2,9 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
 import { colors, radii, spacing, typography } from '../theme/tokens';
 import type { RootStackParamList } from '../src/types/navigation';
 
-// TODO: temporary Figma-hosted URLs, expire ~7 days after export - replace
-// with require('../assets/...') once exported, same as the other screens.
 const ASSETS = {
   navHome: require('../assets/navHome.png'),
   navMaps: require('../assets/navMaps.png'),
@@ -24,12 +21,7 @@ interface BottomNavBarProps {
 
 type Nav = NativeStackNavigationProp<RootStackParamList>;
 
-/**
- * Shared bottom tab bar used across Home, Profile, and (once built) Maps/Alerts.
- * Home and Profile are real registered routes, so tapping them navigates for
- * real. Maps and Alerts don't have screens yet - tapping those currently does
- * nothing (see TODOs below) rather than navigating to a route that doesn't exist.
- */
+
 export default function BottomNavBar({ active }: BottomNavBarProps) {
   const navigation = useNavigation<Nav>();
 

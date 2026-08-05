@@ -5,6 +5,7 @@ import { colors, spacing, radii, typography } from '../theme/tokens';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../src/types/navigation';
 import BottomNavBar from '../components/BottomNavBar';
+import HeaderBar from '../components/HeaderBar';
 
 const ASSETS = {
   headerShieldIcon: require('../assets/shield.png'),
@@ -35,17 +36,7 @@ export default function ProfileScreen({ navigation }: Props) {
   return (
     <View style={styles.root}>
       {/* Header - Top Navigation */}
-      <SafeAreaView edges={['top']} style={styles.header}>
-        <View style={styles.headerRow}>
-          <View style={styles.headerBrand}>
-            <Image source={ASSETS.headerShieldIcon} style={styles.headerIcon} />
-            <Text style={styles.wordmark}>SAFEGUARD</Text>
-          </View>
-          <Pressable>
-            {/* <Image source={{ uri: ASSETS.accountIcon }} style={styles.accountIcon} /> */}
-          </Pressable>
-        </View>
-      </SafeAreaView>
+      <HeaderBar />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Profile Hero */}

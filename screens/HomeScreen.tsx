@@ -14,6 +14,7 @@ import { colors, spacing, radii, typography } from '../theme/tokens';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../src/types/navigation';
 import BottomNavBar from '../components/BottomNavBar';
+import HeaderBar from '../components/HeaderBar';
 
 const ASSETS = {
   sosIcon: require('../assets/sosIcon.png'),
@@ -53,19 +54,7 @@ export default function HomeScreen({ navigation }: Props) {
 
   return (
     <View style={styles.root}>
-      {/* Header - Top Navigation */}
-      <SafeAreaView edges={['top']} style={styles.header}>
-        <View style={styles.headerRow}>
-          <View style={styles.headerBrand}>
-            <Image source={ASSETS.headerShield} style={styles.headerIcon} />
-            <Text style={styles.wordmark}>SAFEGUARD</Text>
-          </View>
-          <Pressable>
-            {/* <Image source={{ uri: ASSETS.menuIcon }} style={styles.menuIcon} /> */}
-          </Pressable>
-        </View>
-      </SafeAreaView>
-
+      <HeaderBar />
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Status Indicator Section */}
         <View style={styles.statusBar}>
@@ -126,7 +115,7 @@ export default function HomeScreen({ navigation }: Props) {
               <Text style={styles.manageText}>Manage</Text>
             </Pressable>
           </View>
-
+          
           {/* TODO: map over the resident's actual emergency contacts from
               GET /api/resident/emergency-contacts instead of this static card */}
           <View style={styles.contactCard}>

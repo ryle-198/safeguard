@@ -15,6 +15,7 @@ import Button from '../components/Button';
 import { colors, spacing, radii, typography } from '../theme/tokens';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../src/types/navigation';
+import HeaderBar from '../components/HeaderBar';
 
 
 const ASSETS = {
@@ -41,15 +42,7 @@ export default function LoginScreen({ navigation }: Props) {
 
   return (
     <View style={styles.root}>
-      {/* Header - Top Bar */}
-      <SafeAreaView edges={['top']} style={styles.header}>
-        <View style={styles.headerContent}>
-          {/* <Image source={{ uri: ASSETS.headerShieldIcon }} style={styles.headerIcon} /> */}
-          <Image source={ASSETS.headerShieldIcon} style={styles.headerIcon} />
-          <Text style={styles.wordmark}>SAFEGUARD</Text>
-        </View>
-      </SafeAreaView>
-
+      <HeaderBar />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -145,24 +138,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  header: {
-    height: 100,
-    backgroundColor: colors.background,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.dividerBorder,
-    justifyContent: 'center',
-  },
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing.sm,
-  },
-  headerIcon: {
-    width: 16,
-    height: 20,
-    resizeMode: 'contain',
-  },
+
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
     fontSize: typography.wordmark.fontSize,
