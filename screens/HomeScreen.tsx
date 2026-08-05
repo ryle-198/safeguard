@@ -8,8 +8,6 @@ import {
   Pressable,
   Animated,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { colors, spacing, radii, typography } from '../theme/tokens';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../src/types/navigation';
