@@ -56,7 +56,6 @@ export const colors = {
   // Profile screen
   profileBackground: '#F9F9FF',
   avatarBackground: '#E8EEFF',
-  accentRed: '#B50C08',
   profileHeading: '#111C2D',
   profileBody: '#5C403B',
   toggleTrackActive: '#B50C08',
@@ -65,6 +64,9 @@ export const colors = {
   deleteRed: '#BA1A1A',
   navInactiveText: '#71717A',
   navActivePillBackground: 'rgba(254,242,242,0.5)',
+
+   accentRed: '#cd5050',
+  sosSection: '#fffff',
 };
 
 export const spacing = {

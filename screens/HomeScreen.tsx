@@ -115,7 +115,7 @@ export default function HomeScreen({ navigation }: Props) {
               <Text style={styles.manageText}>Manage</Text>
             </Pressable>
           </View>
-          
+
           {/* TODO: map over the resident's actual emergency contacts from
               GET /api/resident/emergency-contacts instead of this static card */}
           <View style={styles.contactCard}>
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   sosSection: {
     marginHorizontal: spacing.lg,
     marginTop: spacing.lg,
-    backgroundColor: colors.badgeBackground,
+    backgroundColor: colors.sosSection,
     borderWidth: 2,
     borderColor: colors.dividerBorder,
     alignItems: 'center',
