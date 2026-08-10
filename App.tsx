@@ -3,14 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
-import {
-  useFonts,
-  PublicSans_400Regular,
-  PublicSans_600SemiBold,
-  PublicSans_700Bold,
-  PublicSans_800ExtraBold,
-} from '@expo-google-fonts/public-sans';
-import { JetBrainsMono_500Medium } from '@expo-google-fonts/jetbrains-mono';
+// import {
+//   useFonts,
+//   PublicSans_400Regular,
+//   PublicSans_600SemiBold,
+//   PublicSans_700Bold,
+//   PublicSans_800ExtraBold,
+// } from '@expo-google-fonts/public-sans';
+// import { JetBrainsMono_500Medium } from '@expo-google-fonts/jetbrains-mono';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -27,26 +27,26 @@ SplashScreen.preventAutoHideAsync();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    PublicSans_400Regular,
-    PublicSans_600SemiBold,
-    PublicSans_700Bold,
-    PublicSans_800ExtraBold,
-    JetBrainsMono_500Medium,
-  });
+  // const [fontsLoaded] = useFonts({
+  //   PublicSans_400Regular,
+  //   PublicSans_600SemiBold,
+  //   PublicSans_700Bold,
+  //   PublicSans_800ExtraBold,
+  //   JetBrainsMono_500Medium,
+  // });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
 
   return (
-    <NavigationContainer onReady={onLayoutRootView}>
+    <NavigationContainer>
       <StatusBar style="dark" />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />

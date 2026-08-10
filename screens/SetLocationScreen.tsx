@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
   },
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
+    fontWeight: '800',
     fontSize: typography.wordmark.fontSize,
     lineHeight: typography.wordmark.lineHeight,
     letterSpacing: typography.wordmark.letterSpacing,
@@ -202,6 +203,7 @@ const styles = StyleSheet.create({
   },
   stepIndicator: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -219,6 +221,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 28,
     lineHeight: 36,
     letterSpacing: -0.7,
@@ -226,6 +229,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.stepLabel,
@@ -265,6 +269,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     color: colors.textPrimary,
   },
@@ -353,6 +358,7 @@ const styles = StyleSheet.create({
   },
   coordText: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: -0.6,
@@ -440,6 +446,7 @@ const styles = StyleSheet.create({
   },
   addressLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -448,6 +455,7 @@ const styles = StyleSheet.create({
   },
   addressText: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 20,
     lineHeight: 28,
     color: colors.headingDark,
@@ -481,6 +489,7 @@ const styles = StyleSheet.create({
   },
   completeButtonLabel: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 1.4,
@@ -494,6 +503,7 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,

@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.button.fontSize,
     lineHeight: typography.button.lineHeight,
     letterSpacing: typography.button.letterSpacing,

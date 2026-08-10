@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
 
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
+    fontWeight: '800',
     fontSize: typography.wordmark.fontSize,
     lineHeight: typography.wordmark.lineHeight,
     letterSpacing: typography.wordmark.letterSpacing,
@@ -178,6 +179,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: typography.heading1.fontSize,
     lineHeight: typography.heading1.lineHeight,
     letterSpacing: typography.heading1.letterSpacing,
@@ -187,6 +189,7 @@ const styles = StyleSheet.create({
   },
   subheading: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textSecondary,
@@ -223,6 +226,7 @@ const styles = StyleSheet.create({
   },
   forgotLink: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -250,6 +254,7 @@ const styles = StyleSheet.create({
   },
   dividerText: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -278,6 +283,7 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '700',
     fontSize: typography.badge.fontSize,
     lineHeight: typography.badge.lineHeight,
     letterSpacing: typography.badge.letterSpacing,
@@ -286,6 +292,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: 14,
     lineHeight: 20,
     color: colors.textSecondary,

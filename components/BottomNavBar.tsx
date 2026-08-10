@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
   },
   navLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 11,
     lineHeight: 16.5,
     color: colors.navInactiveText,

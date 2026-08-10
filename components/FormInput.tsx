@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     paddingHorizontal: spacing.lg,
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     color: colors.textPrimary,
   },

@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
   },
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
+    fontWeight: '800',
     fontSize: typography.wordmark.fontSize,
     lineHeight: typography.wordmark.lineHeight,
     letterSpacing: typography.wordmark.letterSpacing,
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
   },
   stepIndicator: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.36,
@@ -154,6 +156,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 24,
     lineHeight: 32,
     letterSpacing: -0.48,
@@ -161,6 +164,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textSecondary,
@@ -183,6 +187,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -208,6 +213,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: 18,
     color: colors.textPrimary,
   },
@@ -228,6 +234,7 @@ const styles = StyleSheet.create({
   },
   requestButtonLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.button.fontSize,
     lineHeight: typography.button.lineHeight,
     letterSpacing: typography.button.letterSpacing,
@@ -240,6 +247,7 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -266,6 +274,7 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: 1.2,

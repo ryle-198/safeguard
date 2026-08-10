@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
   },
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
+    fontWeight: '600',
     fontSize: typography.wordmark.fontSize,
     lineHeight: typography.wordmark.lineHeight,
     letterSpacing: typography.wordmark.letterSpacing,
@@ -222,6 +223,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 30,
     lineHeight: 38,
     letterSpacing: -0.3,
@@ -229,6 +231,7 @@ const styles = StyleSheet.create({
   },
   subline: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textSecondary,
@@ -273,6 +276,7 @@ const styles = StyleSheet.create({
   },
   emergencyLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.button.fontSize,
     lineHeight: typography.button.lineHeight,
     letterSpacing: typography.button.letterSpacing,
@@ -281,6 +285,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: 32,
     lineHeight: 32,
     color: colors.accentRed,
@@ -305,6 +310,7 @@ const styles = StyleSheet.create({
   },
   contactName: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.14,
@@ -312,6 +318,7 @@ const styles = StyleSheet.create({
   },
   contactMeta: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textSecondary,
@@ -341,6 +348,7 @@ const styles = StyleSheet.create({
   },
   cardLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.14,
@@ -349,6 +357,7 @@ const styles = StyleSheet.create({
   },
   addressLine1: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.profileHeading,
@@ -356,6 +365,7 @@ const styles = StyleSheet.create({
   },
   addressLine2: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textSecondary,
@@ -378,6 +388,7 @@ const styles = StyleSheet.create({
   },
   toggleTitle: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.14,
@@ -385,6 +396,7 @@ const styles = StyleSheet.create({
   },
   toggleSubtitle: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: 12,
     lineHeight: 18,
     color: colors.textSecondary,
@@ -416,6 +428,7 @@ const styles = StyleSheet.create({
   },
   signOutText: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.navInactiveText,
@@ -427,6 +440,7 @@ const styles = StyleSheet.create({
   },
   deleteText: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '400',
     fontSize: typography.label.fontSize,
     lineHeight: 18,
     letterSpacing: 1.2,

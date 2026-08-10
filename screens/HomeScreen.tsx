@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
   },
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
+    fontWeight: '800',
     fontSize: typography.wordmark.fontSize,
     lineHeight: typography.wordmark.lineHeight,
     letterSpacing: typography.wordmark.letterSpacing,
@@ -199,6 +200,7 @@ const styles = StyleSheet.create({
   },
   statusLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -223,6 +225,7 @@ const styles = StyleSheet.create({
   },
   statusValue: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 20,
     lineHeight: 28,
     color: colors.textPrimary,
@@ -240,6 +243,7 @@ const styles = StyleSheet.create({
   },
   reportLink: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: typography.button.fontSize,
     lineHeight: typography.button.lineHeight,
     letterSpacing: typography.button.letterSpacing,
@@ -258,6 +262,7 @@ const styles = StyleSheet.create({
   },
   sosHeading: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 24,
     lineHeight: 32,
     letterSpacing: -0.48,
@@ -265,6 +270,7 @@ const styles = StyleSheet.create({
   },
   sosSubheading: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textSecondary,
@@ -296,6 +302,7 @@ const styles = StyleSheet.create({
   },
   sosButtonLabel: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textOnPrimary,
@@ -303,6 +310,7 @@ const styles = StyleSheet.create({
   },
   holdLabel: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     letterSpacing: 1.6,
@@ -346,6 +354,7 @@ const styles = StyleSheet.create({
   },
   sectionLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 1.4,
@@ -364,6 +373,7 @@ const styles = StyleSheet.create({
   },
   manageText: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.navActiveLabel,
@@ -385,6 +395,7 @@ const styles = StyleSheet.create({
   },
   contactText: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textPrimary,
@@ -409,12 +420,14 @@ const styles = StyleSheet.create({
   },
   feedTitle: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textPrimary,
   },
   feedDateLabel: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,
@@ -432,12 +445,14 @@ const styles = StyleSheet.create({
   },
   feedItemTitle: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: typography.body.fontSize,
     lineHeight: typography.body.lineHeight,
     color: colors.textPrimary,
   },
   feedItemMeta: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: typography.label.fontSize,
     lineHeight: typography.label.lineHeight,
     letterSpacing: typography.label.letterSpacing,

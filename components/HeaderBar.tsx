@@ -36,6 +36,7 @@ return(
 
         wordmark: {
         fontFamily: typography.fontFamily.extraBold,
+        fontWeight: '800',
         fontSize: typography.wordmark.fontSize,
         lineHeight: typography.wordmark.lineHeight,
         letterSpacing: typography.wordmark.letterSpacing,

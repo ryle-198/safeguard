@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 export const colors = {
 
   primary: '#D92D20',        
@@ -86,12 +88,11 @@ export const radii = {
 
 export const typography = {
   fontFamily: {
-    regular: 'PublicSans_400Regular',
-    semiBold: 'PublicSans_600SemiBold',
-    bold: 'PublicSans_700Bold',
-    extraBold: 'PublicSans_800ExtraBold',
-    // Used for GPS coordinates
-    mono: 'JetBrainsMono_500Medium',
+    regular: Platform.select({ ios: 'System', android: 'sans-serif', default: undefined }),
+    semiBold: Platform.select({ ios: 'System', android: 'sans-serif-medium', default: undefined }),
+    bold: Platform.select({ ios: 'System', android: 'sans-serif', default: undefined }),
+    extraBold: Platform.select({ ios: 'System', android: 'sans-serif', default: undefined }),
+    mono: Platform.select({ ios: 'Courier', android: 'monospace', default: 'monospace' }),
   },
   heading1: {
     fontSize: 32,

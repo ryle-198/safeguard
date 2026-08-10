@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
   },
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
+    fontWeight: '800',
     fontSize: typography.wordmark.fontSize,
     lineHeight: typography.wordmark.lineHeight,
     letterSpacing: typography.wordmark.letterSpacing,
@@ -210,6 +211,7 @@ const styles = StyleSheet.create({
   },
   stepIndicator: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.36,
@@ -228,12 +230,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 28,
     lineHeight: 36,
     color: colors.textDark,
   },
   subtitle: {
     fontFamily: typography.fontFamily.regular,
+    fontWeight: '400',
     fontSize: 16,
     lineHeight: 26,
     color: colors.stepLabel,
@@ -241,6 +245,7 @@ const styles = StyleSheet.create({
   },
   subtitleEmphasis: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     color: colors.textDark,
     letterSpacing: 0.4,
   },
@@ -260,6 +265,7 @@ const styles = StyleSheet.create({
     borderColor: colors.otpBorder,
     borderRadius: radii.md,
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 24,
     color: colors.textDark,
   },
@@ -283,6 +289,7 @@ const styles = StyleSheet.create({
   },
   timerText: {
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.36,
@@ -295,6 +302,7 @@ const styles = StyleSheet.create({
   },
   resendText: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: typography.button.fontSize,
     lineHeight: typography.button.lineHeight,
     letterSpacing: typography.button.letterSpacing,
@@ -324,6 +332,7 @@ const styles = StyleSheet.create({
   },
   continueButtonLabel: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 1.4,
@@ -353,6 +362,7 @@ const styles = StyleSheet.create({
   },
   backButtonLabel: {
     fontFamily: typography.fontFamily.bold,
+    fontWeight: '700',
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 1.4,
@@ -377,6 +387,7 @@ const styles = StyleSheet.create({
   vaultText: {
     flex: 1,
     fontFamily: typography.fontFamily.semiBold,
+    fontWeight: '600',
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.36,
