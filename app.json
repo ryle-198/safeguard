@@ -19,7 +19,7 @@
       "output": "single"
     },
     "experiments": {
-      "baseUrl": "/safeguard-mobile"
+      "baseUrl": "/safeguard"
     }
   }
 }
