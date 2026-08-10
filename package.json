@@ -7,7 +7,9 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "predeploy": "expo export -p web",
+    "deploy": "gh-pages --nojekyll -d dist"
   },
   "dependencies": {
     "@expo-google-fonts/jetbrains-mono": "^0.4.1",
@@ -28,5 +30,8 @@
     "react-native-svg": "15.12.1",
     "react-native-web": "^0.21.0",
     "typescript": "~5.9.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
