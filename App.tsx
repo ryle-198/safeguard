@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import * as SplashScreen from 'expo-splash-screen';
+// import * as SplashScreen from 'expo-splash-screen';
 // import {
 //   useFonts,
 //   PublicSans_400Regular,
@@ -18,9 +18,10 @@ import RegisterScreen from './screens/RegisterScreen';
 import VerifyOtpScreen from './screens/VerifyOtpScreen';
 import SetLocationScreen from './screens/SetLocationScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import AlertsScreen from './screens/AlertScreen';
 import { RootStackParamList } from './src/types/navigation';
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 // Typed navigator - this is what lets TypeScript catch route-name typos
 // like the SetLocation/SetHomeLocation mismatch that was just fixed here.
@@ -55,6 +56,7 @@ export default function App() {
         <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
         <Stack.Screen name="SetHomeLocation" component={SetLocationScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Alert" component={AlertsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

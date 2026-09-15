@@ -49,7 +49,7 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
           label="ALERTS"
           icon={ASSETS.navAlerts}
           active={active === 'Alerts'}
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Alert')}
         />
 
         <NavItem
