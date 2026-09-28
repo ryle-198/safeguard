@@ -3,6 +3,7 @@
     "name": "SAFEGUARD",
     "slug": "safeguard",
     "version": "1.0.0",
+    "scheme": "safeguard",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -12,11 +13,20 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#F8F9FA"
-      }
+      },
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
     },
     "web": {
       "bundler": "metro",
       "output": "single"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "SAFEGUARD uses your location to set your home address and dispatch guards accurately."
+        }
+      ]
+    ]
   }
 }

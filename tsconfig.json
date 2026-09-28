@@ -4,6 +4,7 @@
     "lib": [
       "esnext"
     ],
+    "types": ["node"],
     "jsx": "react-native",
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -23,4 +24,5 @@
     "node_modules"
   ],
   "extends": "expo/tsconfig.base"
+
 }

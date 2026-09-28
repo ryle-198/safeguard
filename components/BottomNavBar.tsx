@@ -1,9 +1,11 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, radii, spacing, typography } from '../theme/tokens';
 import type { RootStackParamList } from '../src/types/navigation';
+import { supabase } from '../lib/supabase';
 
 const ASSETS = {
   navHome: require('../assets/navHome.png'),
@@ -21,9 +23,60 @@ interface BottomNavBarProps {
 
 type Nav = NativeStackNavigationProp<RootStackParamList>;
 
-
 export default function BottomNavBar({ active }: BottomNavBarProps) {
   const navigation = useNavigation<Nav>();
+  const [checkingActiveAlert, setCheckingActiveAlert] = useState(false);
+
+  /*
+   * "Maps" doesn't have a standalone map screen of its own yet - what
+   * residents actually want from it is to see their in-progress alert on
+   * the map, so it looks up the resident's current active alert (if any)
+   * and routes to ActiveAlertScreen for it. There's nothing to show if
+   * there isn't one.
+   */
+  const handleMapsPress = async () => {
+    if (checkingActiveAlert) {
+      return;
+    }
+
+    setCheckingActiveAlert(true);
+
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('alerts')
+        .select('id')
+        .eq('resident_id', user.id)
+        .not('status', 'in', '(RESOLVED,CANCELLED)')
+        .order('triggered_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (error) {
+        console.error('Failed to check for an active alert:', error.message);
+        Alert.alert('Something went wrong', 'Could not check for an active alert.');
+        return;
+      }
+
+      if (data) {
+        navigation.navigate('ActiveAlert', { alertId: String(data.id) });
+      } else {
+        Alert.alert('No active alert', "You don't have an emergency alert in progress right now.");
+      }
+    } catch (error) {
+      console.error('Unexpected error checking for an active alert:', error);
+      Alert.alert('Something went wrong', 'Could not check for an active alert.');
+    } finally {
+      setCheckingActiveAlert(false);
+    }
+  };
 
   return (
     <SafeAreaView edges={['bottom']} style={styles.navBar}>
@@ -35,16 +88,13 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
           onPress={() => navigation.navigate('Home')}
         />
 
-        {/* TODO: Maps screen not built yet - wire navigation.navigate('Maps')
-            once it exists and is added to RootStackParamList. */}
         <NavItem
           label="MAPS"
           icon={ASSETS.navMaps}
           active={active === 'Maps'}
-          onPress={() => {}}
+          onPress={handleMapsPress}
         />
 
-        {/* TODO: Alerts screen not built yet - same as above. */}
         <NavItem
           label="ALERTS"
           icon={ASSETS.navAlerts}

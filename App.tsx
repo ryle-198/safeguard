@@ -1,63 +1,182 @@
-import { useCallback } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
-// import * as SplashScreen from 'expo-splash-screen';
-// import {
-//   useFonts,
-//   PublicSans_400Regular,
-//   PublicSans_600SemiBold,
-//   PublicSans_700Bold,
-//   PublicSans_800ExtraBold,
-// } from '@expo-google-fonts/public-sans';
-// import { JetBrainsMono_500Medium } from '@expo-google-fonts/jetbrains-mono';
+import React, { useEffect, useState } from 'react';
+import {
+  NavigationContainer,
+} from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
+import {
+  StatusBar,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import VerifyOtpScreen from './screens/VerifyOtpScreen';
 import SetLocationScreen from './screens/SetLocationScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import AlertsScreen from './screens/AlertScreen';
+import ActiveAlertScreen from './screens/ActiveAlertScreen';
+import EmailVerificationScreen from './screens/EmailVerificationScreen';
+import EmergencyContactsScreen from './screens/EmergencyContactsScreen';
+import EditProfileScreen from './screens/EditProfileScreen';
+import GuardHomeScreen from './screens/GuardHomeScreen';
+import GuardAlertsScreen from './screens/GuardAlertsScreen';
+import GuardActiveAlertScreen from './screens/GuardActiveAlertScreen';
+
 import { RootStackParamList } from './src/types/navigation';
+import { useAuthRole } from './src/hooks/useAuthRole';
+import { colors } from './theme/tokens';
+import { supabase } from './lib/supabase';
 
-// SplashScreen.preventAutoHideAsync();
-
-// Typed navigator - this is what lets TypeScript catch route-name typos
-// like the SetLocation/SetHomeLocation mismatch that was just fixed here.
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  // const [fontsLoaded] = useFonts({
-  //   PublicSans_400Regular,
-  //   PublicSans_600SemiBold,
-  //   PublicSans_700Bold,
-  //   PublicSans_800ExtraBold,
-  //   JetBrainsMono_500Medium,
-  // });
+  const { initializing, session, role } = useAuthRole();
 
-  // const onLayoutRootView = useCallback(async () => {
-  //   if (fontsLoaded) {
-  //     await SplashScreen.hideAsync();
-  //   }
-  // }, [fontsLoaded]);
+  const [residentHasHomeLocation, setResidentHasHomeLocation] = useState<
+    boolean | null
+  >(null);
 
-  // if (!fontsLoaded) {
-  //   return null;
-  // }
+  useEffect(() => {
+    let cancelled = false;
+
+    if (role !== 'RESIDENT') {
+      setResidentHasHomeLocation(null);
+      return;
+    }
+
+    const checkHomeLocation = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user) {
+          if (!cancelled) {
+            setResidentHasHomeLocation(false);
+          }
+          return;
+        }
+
+        const { data, error } = await supabase
+          .from('residents')
+          .select('residents_home_location_text')
+          .eq('user_id', user.id)
+          .maybeSingle();
+
+        if (error) {
+          console.error(
+            'Failed to check resident home location:',
+            error.message
+          );
+
+          if (!cancelled) {
+            setResidentHasHomeLocation(true);
+          }
+          return;
+        }
+
+        if (!cancelled) {
+          setResidentHasHomeLocation(
+            Boolean(data?.residents_home_location_text)
+          );
+        }
+      } catch (error) {
+        console.error('Unexpected home location check error:', error);
+
+        if (!cancelled) {
+          setResidentHasHomeLocation(true);
+        }
+      }
+    };
+
+    checkHomeLocation();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [role]);
+
+  const stillResolvingResident =
+    role === 'RESIDENT' && residentHasHomeLocation === null;
+
+  if (initializing || stillResolvingResident) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.background }}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
-    <NavigationContainer>
-      <StatusBar style="dark" />
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
-        <Stack.Screen name="SetHomeLocation" component={SetLocationScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="Alert" component={AlertsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="#FFFFFF"
+      />
+
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          {!session ? (
+            // ---------------- AUTH ----------------
+            <>
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Register" component={RegisterScreen} />
+              <Stack.Screen name="EmailVerification" component={EmailVerificationScreen} />
+            </>
+          ) : role === 'GUARD' ? (
+            // ---------------- GUARD ----------------
+            <>
+              <Stack.Screen name="GuardHome" component={GuardHomeScreen} />
+              <Stack.Screen name="GuardAlerts" component={GuardAlertsScreen} />
+              <Stack.Screen
+                name="GuardActiveAlert"
+                component={GuardActiveAlertScreen}
+                options={{ gestureEnabled: false }}
+              />
+            </>
+          ) : role === 'RESIDENT' ? (
+            // ---------------- RESIDENT ----------------
+            residentHasHomeLocation ? (
+              <>
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="SetHomeLocation" component={SetLocationScreen} />
+                <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen name="Alert" component={AlertsScreen} />
+                <Stack.Screen
+                  name="ActiveAlert"
+                  component={ActiveAlertScreen}
+                  options={{ gestureEnabled: false }}
+                />
+                <Stack.Screen name="EmergencyContacts" component={EmergencyContactsScreen} />
+                <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="SetHomeLocation" component={SetLocationScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen name="Alert" component={AlertsScreen} />
+                <Stack.Screen
+                  name="ActiveAlert"
+                  component={ActiveAlertScreen}
+                  options={{ gestureEnabled: false }}
+                />
+                <Stack.Screen name="EmergencyContacts" component={EmergencyContactsScreen} />
+                <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+              </>
+            )
+          ) : (
+            <Stack.Screen name="Login" component={LoginScreen} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
