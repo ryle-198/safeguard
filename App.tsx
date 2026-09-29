@@ -28,6 +28,7 @@ import AlertDetail from './screens/AlertDetail';
 import ReportActivityScreen from './screens/ReportActivityScreen';
 import CommunityScreen from './screens/CommunityScreen';
 import HotspotMapScreen from './screens/HotspotMapScreen';
+import { Alert, Platform } from 'react-native';
 
 import { RootStackParamList } from './src/types/navigation';
 import { useAuthRole } from './src/hooks/useAuthRole';
@@ -42,6 +43,29 @@ export default function App() {
   const [residentHasHomeLocation, setResidentHasHomeLocation] = useState<
     boolean | null
   >(null);
+
+  if (Platform.OS === 'web') {
+  Alert.alert = (title, message, buttons) => {
+    const text = message ? `${title}\n\n${message}` : title;
+
+    // No buttons, or a single button: plain alert, then run its handler.
+    if (!buttons || buttons.length <= 1) {
+      window.alert(text);
+      buttons?.[0]?.onPress?.();
+      return;
+    }
+
+    // Two or more buttons: confirm() OK runs the action, Cancel runs the cancel button.
+    const cancelButton = buttons.find((b) => b.style === 'cancel');
+    const actionButton = buttons.find((b) => b !== cancelButton) ?? buttons[0];
+
+    if (window.confirm(text)) {
+      actionButton.onPress?.();
+    } else {
+      cancelButton?.onPress?.();
+    }
+  };
+}
 
   useEffect(() => {
     let cancelled = false;

@@ -82,6 +82,14 @@ export default function SetLocationScreen({ navigation }: Props) {
   // Pushed on top of something (e.g. "Change" in EditProfileScreen) = editing.
   const isEditing = navigation.canGoBack();
 
+  const handleBack = () => {
+  if (isEditing) {
+    navigation.goBack();
+  } else {
+    navigation.navigate('Home');
+  }
+};
+
   useEffect(() => {
     return () => {
       if (reverseTimer.current) clearTimeout(reverseTimer.current);
@@ -306,11 +314,18 @@ export default function SetLocationScreen({ navigation }: Props) {
       {/* Header */}
       <SafeAreaView edges={['top']} style={styles.header}>
         <View style={styles.headerRow}>
-          <View style={styles.headerBrand}>
-            <Image source={ASSETS.headerShieldIcon} style={styles.headerIcon} />
-            <Text style={styles.wordmark}>SAFEGUARD</Text>
-          </View>
-        </View>
+  <Pressable onPress={handleBack} hitSlop={12} style={styles.backButton}>
+    <Text style={styles.backArrow}>‹</Text>
+  </Pressable>
+
+  <View style={styles.headerBrand}>
+    <Image source={ASSETS.headerShieldIcon} style={styles.headerIcon} />
+    <Text style={styles.wordmark}>SAFEGUARD</Text>
+  </View>
+
+  {/* Same width as the back button so the brand stays centred */}
+  <View style={styles.backButton} />
+</View>
       </SafeAreaView>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -485,6 +500,15 @@ const styles = StyleSheet.create({
     height: 20,
     resizeMode: 'contain',
   },
+
+  backButton: {
+  width: 24,
+},
+backArrow: {
+  fontSize: 28,
+  lineHeight: 32,
+  color: colors.primary,
+},
   wordmark: {
     fontFamily: typography.fontFamily.extraBold,
     fontWeight: '800',

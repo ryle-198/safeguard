@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, radii, spacing, typography } from '../theme/tokens';
 import type { RootStackParamList } from '../src/types/navigation';
+import { notify } from '../lib/notify';
 import { supabase } from '../lib/supabase';
 
 const ASSETS = {
@@ -35,48 +36,49 @@ export default function BottomNavBar({ active }: BottomNavBarProps) {
    * there isn't one.
    */
   const handleMapsPress = async () => {
-    if (checkingActiveAlert) {
+  if (checkingActiveAlert) {
+    return;
+  }
+
+  setCheckingActiveAlert(true);
+
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      notify('Session expired', 'Please sign in again.');
       return;
     }
 
-    setCheckingActiveAlert(true);
+    const { data, error } = await supabase
+      .from('alerts')
+      .select('id')
+      .eq('resident_id', user.id)
+      .not('status', 'in', '(RESOLVED,CANCELLED)')
+      .order('triggered_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
 
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from('alerts')
-        .select('id')
-        .eq('resident_id', user.id)
-        .not('status', 'in', '(RESOLVED,CANCELLED)')
-        .order('triggered_at', { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      if (error) {
-        console.error('Failed to check for an active alert:', error.message);
-        Alert.alert('Something went wrong', 'Could not check for an active alert.');
-        return;
-      }
-
-      if (data) {
-        navigation.navigate('ActiveAlert', { alertId: String(data.id) });
-      } else {
-        Alert.alert('No active alert', "You don't have an emergency alert in progress right now.");
-      }
-    } catch (error) {
-      console.error('Unexpected error checking for an active alert:', error);
-      Alert.alert('Something went wrong', 'Could not check for an active alert.');
-    } finally {
-      setCheckingActiveAlert(false);
+    if (error) {
+      console.error('Failed to check for an active alert:', error.message);
+      notify('Something went wrong', 'Could not check for an active alert.');
+      return;
     }
-  };
+
+    if (data) {
+      navigation.navigate('ActiveAlert', { alertId: String(data.id) });
+    } else {
+      notify('No active alert', "You don't have an emergency alert in progress right now.");
+    }
+  } catch (error) {
+    console.error('Unexpected error checking for an active alert:', error);
+    notify('Something went wrong', 'Could not check for an active alert.');
+  } finally {
+    setCheckingActiveAlert(false);
+  }
+};
 
   return (
     <SafeAreaView edges={['bottom']} style={styles.navBar}>

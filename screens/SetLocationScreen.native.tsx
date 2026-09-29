@@ -94,6 +94,14 @@ export default function SetLocationScreen({
    */
   const isEditing = navigation.canGoBack();
 
+  const handleBack = () => {
+  if (isEditing) {
+    navigation.goBack();
+  } else {
+    navigation.navigate('Home');
+  }
+};
+
   /*
    * ----------------------------------------------------
    * LOAD EXISTING HOME LOCATION (if one is already saved)
@@ -504,21 +512,18 @@ export default function SetLocationScreen({
         style={styles.header}
       >
         <View style={styles.headerRow}>
-          <View style={styles.headerBrand}>
-            <Image
-              source={ASSETS.headerShieldIcon}
-              style={styles.headerIcon}
-            />
+  <Pressable onPress={handleBack} hitSlop={12} style={styles.backButton}>
+    <Text style={styles.backArrow}>‹</Text>
+  </Pressable>
 
-            <Text style={styles.wordmark}>
-              SAFEGUARD
-            </Text>
-          </View>
+  <View style={styles.headerBrand}>
+    <Image source={ASSETS.headerShieldIcon} style={styles.headerIcon} />
+    <Text style={styles.wordmark}>SAFEGUARD</Text>
+  </View>
 
-          {/* <Text style={styles.stepIndicator}>
-            STEP 3 OF 3
-          </Text> */}
-        </View>
+  {/* Same width as the back button so the brand stays centred */}
+  <View style={styles.backButton} />
+</View>
       </SafeAreaView>
 
       <ScrollView
@@ -820,6 +825,15 @@ const styles = StyleSheet.create({
     height: 20,
     resizeMode: 'contain',
   },
+
+  backButton: {
+  width: 24,
+},
+backArrow: {
+  fontSize: 28,
+  lineHeight: 32,
+  color: colors.primary,
+},
 
   wordmark: {
     fontFamily:
