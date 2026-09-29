@@ -17,6 +17,10 @@ export type RootStackParamList = {
   ActiveAlert: {
     alertId: string;
   };
+  AlertDetail: { alertId: string };
+  ReportActivity: undefined;
+  Community: undefined;
+  HotspotMap: undefined;
 
   // Guard
   GuardHome: undefined;

@@ -249,10 +249,7 @@ export default function AlertScreen({ navigation }: Props) {
               <Pressable
                 key={alert.id}
                 style={styles.alertItem}
-                onPress={() => {
-                  // TODO: navigate to an alert detail screen once one exists,
-                  // e.g. navigation.navigate('AlertDetail', { alertId: alert.id })
-                }}
+                onPress={() => navigation.navigate('AlertDetail', { alertId: alert.id })}
               >
                 <View style={styles.alertItemLeft}>
                   <View

@@ -24,6 +24,10 @@ import EditProfileScreen from './screens/EditProfileScreen';
 import GuardHomeScreen from './screens/GuardHomeScreen';
 import GuardAlertsScreen from './screens/GuardAlertsScreen';
 import GuardActiveAlertScreen from './screens/GuardActiveAlertScreen';
+import AlertDetail from './screens/AlertDetail';
+import ReportActivityScreen from './screens/ReportActivityScreen';
+import CommunityScreen from './screens/CommunityScreen';
+import HotspotMapScreen from './screens/HotspotMapScreen';
 
 import { RootStackParamList } from './src/types/navigation';
 import { useAuthRole } from './src/hooks/useAuthRole';
@@ -156,6 +160,10 @@ export default function App() {
                 />
                 <Stack.Screen name="EmergencyContacts" component={EmergencyContactsScreen} />
                 <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+                <Stack.Screen name="AlertDetail" component={AlertDetail} />
+                <Stack.Screen name="ReportActivity" component={ReportActivityScreen} />
+                <Stack.Screen name="Community" component={CommunityScreen} />
+                <Stack.Screen name="HotspotMap" component={HotspotMapScreen} />
               </>
             ) : (
               <>

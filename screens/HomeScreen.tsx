@@ -496,9 +496,11 @@ export default function HomeScreen({ navigation }: Props) {
           </View>
 
           <View style={styles.zoneColumn}>
-            <Text style={styles.zoneLabel}>ZONE 42-B</Text>
+            <Pressable onPress={() => navigation.navigate('Community')}>
+              <Text style={styles.zoneLabel}>ZONE 42-B</Text>
+            </Pressable>
 
-            <Pressable>
+            <Pressable onPress={() => navigation.navigate('ReportActivity')}>
               <Text style={styles.reportLink}>Report Activities</Text>
             </Pressable>
           </View>
@@ -684,6 +686,10 @@ const styles = StyleSheet.create({
     letterSpacing: typography.label.letterSpacing,
     color: colors.textSecondary,
     textTransform: 'uppercase',
+    borderWidth: 2,
+    borderColor: colors.dividerBorder,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
   },
   reportLink: {
     fontFamily: typography.fontFamily.bold,
