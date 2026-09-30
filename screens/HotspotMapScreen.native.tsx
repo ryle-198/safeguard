@@ -102,7 +102,7 @@ export default function HotspotMapScreen({ navigation }: Props) {
             <Text
               style={[styles.periodChipText, daysBack === period && styles.periodChipTextActive]}
             >
-              {period}
+              {period} Days
             </Text>
           </Pressable>
         ))}
