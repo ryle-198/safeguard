@@ -81,14 +81,15 @@ export default function MembershipCard() {
     };
   }, [load, pollForActivation]);
 
-  const handlePay = async () => {
-    setPaying(true);
-    setError('');
-    try {
-      const { data, error: fnError } = await supabase.functions.invoke(
-        'create-payfast-payment',
-      );
-      if (fnError || !data?.url) throw fnError ?? new Error('No payment URL returned.');
+const handlePay = async () => {
+  setPaying(true);
+  setError('');
+  try {
+    const { data, error: fnError } = await supabase.functions.invoke(
+      'create-payfast-payment',
+      { body: { native: Platform.OS !== 'web' } },
+    );
+    if (fnError || !data?.url) throw fnError ?? new Error('No payment URL returned.');
 
       if (Platform.OS === 'web') {
         window.location.href = data.url; // leaves the app; returns via return_url

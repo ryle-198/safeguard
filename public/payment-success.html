@@ -1,0 +1,15 @@
+<!doctype html>
+<html><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAFEGUARD</title>
+  <style>body{font-family:sans-serif;text-align:center;padding:64px 24px;color:#1a1a1a}</style>
+</head><body>
+  <h2 id="t">Payment received</h2>
+  <p id="m">You can now close this window and return to the SAFEGUARD app.</p>
+  <script>
+    if (location.search.includes("cancelled")) {
+      document.getElementById("t").textContent = "Payment cancelled";
+      document.getElementById("m").textContent = "No charge was made. Close this window to return to the app.";
+    }
+  </script>
+</body></html>

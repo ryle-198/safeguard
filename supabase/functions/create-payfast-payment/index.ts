@@ -24,6 +24,7 @@ const md5 = (s: string) => createHash("md5").update(s).digest("hex");
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+  const { native } = await req.json().catch(() => ({}));
 
   // Identify the user from their JWT. Never trust a user id from the request body.
   const userClient = createClient(
@@ -56,8 +57,8 @@ Deno.serve(async (req) => {
   const fields: [string, string][] = [
     ["merchant_id", Deno.env.get("PAYFAST_MERCHANT_ID")!],
     ["merchant_key", Deno.env.get("PAYFAST_MERCHANT_KEY")!],
-    ["return_url", `${APP_URL}/?payment=success`],
-    ["cancel_url", `${APP_URL}/?payment=cancelled`],
+["return_url", native ? `${APP_URL}/payment-success.html` : `${APP_URL}/?payment=success`],
+["cancel_url", native ? `${APP_URL}/payment-success.html?status=cancelled` : `${APP_URL}/?payment=cancelled`],
     ["notify_url", `${Deno.env.get("SUPABASE_URL")}/functions/v1/payfast-itn`],
   ];
   if (user.email) fields.push(["email_address", user.email]);
