@@ -28,6 +28,11 @@ const ASSETS = {
   headerShieldIcon: require('../assets/shield.png'),
 };
 
+const emailRedirectTo = 
+Platform.OS === 'web'
+  ? 'https://safeguard-kanon9.vercel.app'
+    : 'safeguard://auth/callback';
+
 export default function RegisterScreen({
   navigation,
 }: Props) {
@@ -79,7 +84,7 @@ export default function RegisterScreen({
         email: email.trim().toLowerCase(),
         password,
         options: {
-          emailRedirectTo: 'safeguard://auth/callback',
+          emailRedirectTo,
           data: {
             full_name: fullName.trim(),
           },

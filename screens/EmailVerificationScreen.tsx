@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Platform,
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -23,6 +24,11 @@ export default function EmailVerificationScreen({ navigation, route }: Props) {
   const [resending, setResending] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+
+  const emailRedirectTo =
+  Platform.OS === 'web'
+    ? 'https://safeguard-kanon9.vercel.app'
+    : 'safeguard://auth/callback';
 
   const checkVerification = async () => {
     setLoading(true);
@@ -88,7 +94,7 @@ export default function EmailVerificationScreen({ navigation, route }: Props) {
         type: 'signup',
         email,
         options: {
-          emailRedirectTo: 'safeguard://auth/callback',
+          emailRedirectTo,
         },
       });
 
