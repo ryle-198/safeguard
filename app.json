@@ -14,7 +14,10 @@
       "adaptiveIcon": {
         "backgroundColor": "#F8F9FA"
       },
-      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -26,7 +29,8 @@
         {
           "locationAlwaysAndWhenInUsePermission": "SAFEGUARD uses your location to set your home address and dispatch guards accurately."
         }
-      ]
+      ],
+      "expo-web-browser"
     ]
   }
 }

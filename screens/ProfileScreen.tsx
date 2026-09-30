@@ -17,6 +17,7 @@ import { RootStackParamList } from '../src/types/navigation';
 import BottomNavBar from '../components/BottomNavBar';
 import HeaderBar from '../components/HeaderBar';
 import { supabase } from '../lib/supabase';
+import MembershipCard from '../components/MembershipCard';
 
 const ASSETS = {
   headerShieldIcon: require('../assets/shield.png'),
@@ -256,6 +257,7 @@ export default function ProfileScreen({ navigation }: Props) {
               : 'N/A'}
           </Text>
         </View>
+        <MembershipCard />
 
         {/* Emergency Contact Card */}
         <View style={styles.emergencyCard}>

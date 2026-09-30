@@ -21,7 +21,9 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    "supabase/functions"
   ],
   "extends": "expo/tsconfig.base"
 
