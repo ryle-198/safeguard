@@ -10,8 +10,9 @@ import {
 import * as WebBrowser from 'expo-web-browser';
 import { colors, spacing, radii, typography } from '../theme/tokens';
 import { supabase } from '../lib/supabase';
+import CardDetailsModal, { SavedCard } from './CardDetailsModal';
 
-const PRICE_LABEL = 'R99'; // display only; the real price lives in the edge function
+const PRICE_LABEL = 'R99';
 
 type Membership = {
   membership_active: boolean;
@@ -20,12 +21,14 @@ type Membership = {
 
 export default function MembershipCard() {
   const [membership, setMembership] = useState<Membership | null>(null);
+  const [card, setCard] = useState<SavedCard | null>(null);
+  const [showCardModal, setShowCardModal] = useState(false);
   const [paying, setPaying] = useState(false);
   const [checking, setChecking] = useState(false);
   const [error, setError] = useState('');
   const pollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // expires_at is the source of truth, not just the boolean flag
+  
   const isActive =
     !!membership?.membership_active &&
     !!membership.membership_expires_at &&
@@ -51,6 +54,21 @@ export default function MembershipCard() {
     );
   }, []);
 
+  const loadCard = useCallback(async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { data } = await supabase
+      .from('demo_payment_methods')
+      .select('brand, last4, exp_month, exp_year')
+      .eq('user_id', user.id)
+      .maybeSingle();
+
+    setCard(data ?? null);
+  }, []);
+
   // After returning from PayFast the ITN can lag a few seconds, so poll briefly.
   const pollForActivation = useCallback(
     (attempt = 0) => {
@@ -68,6 +86,7 @@ export default function MembershipCard() {
 
   useEffect(() => {
     load();
+    loadCard();
     // Web: PayFast sends the browser back to /?payment=success
     if (
       Platform.OS === 'web' &&
@@ -79,17 +98,17 @@ export default function MembershipCard() {
     return () => {
       if (pollTimer.current) clearTimeout(pollTimer.current);
     };
-  }, [load, pollForActivation]);
+  }, [load, loadCard, pollForActivation]);
 
-const handlePay = async () => {
-  setPaying(true);
-  setError('');
-  try {
-    const { data, error: fnError } = await supabase.functions.invoke(
-      'create-payfast-payment',
-      { body: { native: Platform.OS !== 'web' } },
-    );
-    if (fnError || !data?.url) throw fnError ?? new Error('No payment URL returned.');
+  const startPayment = async () => {
+    setPaying(true);
+    setError('');
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke(
+        'create-payfast-payment',
+        { body: { native: Platform.OS !== 'web' } },
+      );
+      if (fnError || !data?.url) throw fnError ?? new Error('No payment URL returned.');
 
       if (Platform.OS === 'web') {
         window.location.href = data.url; // leaves the app; returns via return_url
@@ -105,6 +124,21 @@ const handlePay = async () => {
     }
   };
 
+  // No card on file yet: collect one first. Otherwise go straight to PayFast.
+  const handlePay = () => {
+    if (!card) {
+      setShowCardModal(true);
+      return;
+    }
+    startPayment();
+  };
+
+  const handleCardSaved = (saved: SavedCard) => {
+    setCard(saved);
+    setShowCardModal(false);
+    startPayment();
+  };
+
   const expiryText = membership?.membership_expires_at
     ? new Date(membership.membership_expires_at).toLocaleDateString('en-ZA', {
         day: 'numeric',
@@ -112,6 +146,8 @@ const handlePay = async () => {
         year: 'numeric',
       })
     : '';
+
+  const cardLabel = card ? `${card.brand} •••• ${card.last4}` : '';
 
   return (
     <View style={styles.card}>
@@ -126,6 +162,18 @@ const handlePay = async () => {
             : 'No active membership'}
         </Text>
       )}
+
+      {card ? (
+        <View style={styles.cardRow}>
+          <Text style={styles.cardText}>
+            {cardLabel} · expires {String(card.exp_month).padStart(2, '0')}/
+            {String(card.exp_year).slice(-2)}
+          </Text>
+          <Pressable onPress={() => setShowCardModal(true)}>
+            <Text style={styles.changeText}>Change</Text>
+          </Pressable>
+        </View>
+      ) : null}
 
       {checking ? (
         <View style={styles.checkingRow}>
@@ -145,9 +193,9 @@ const handlePay = async () => {
           <ActivityIndicator color="#FFFFFF" />
         ) : (
           <Text style={styles.buttonText}>
-            {isActive
-              ? `RENEW EARLY · ${PRICE_LABEL}/MONTH`
-              : `ACTIVATE MEMBERSHIP · ${PRICE_LABEL}/MONTH`}
+            {card
+              ? `PAY ${PRICE_LABEL} · ${cardLabel.toUpperCase()}`
+              : `ADD CARD AND PAY ${PRICE_LABEL}/MONTH`}
           </Text>
         )}
       </Pressable>
@@ -155,6 +203,12 @@ const handlePay = async () => {
       <Pressable onPress={() => pollForActivation()}>
         <Text style={styles.refresh}>Already paid? Refresh status</Text>
       </Pressable>
+
+      <CardDetailsModal
+        visible={showCardModal}
+        onClose={() => setShowCardModal(false)}
+        onSaved={handleCardSaved}
+      />
     </View>
   );
 }
@@ -184,6 +238,21 @@ const styles = StyleSheet.create({
     fontFamily: typography.fontFamily.semiBold,
     fontSize: 15,
     color: colors.profileHeading,
+  },
+  cardRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cardText: {
+    fontFamily: typography.fontFamily.regular,
+    fontSize: 13,
+    color: colors.textSecondary,
+  },
+  changeText: {
+    fontFamily: typography.fontFamily.semiBold,
+    fontSize: 13,
+    color: colors.primary,
   },
   checkingRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   helper: {

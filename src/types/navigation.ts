@@ -21,6 +21,7 @@ export type RootStackParamList = {
   ReportActivity: undefined;
   Community: undefined;
   HotspotMap: undefined;
+  Membership: undefined;
 
   // Guard
   GuardHome: undefined;
