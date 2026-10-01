@@ -198,14 +198,14 @@ export default function CardDetailsModal({ visible, onClose, onSaved }: Props) {
           >
             <Text style={styles.title}>Please select a payment method</Text>
 
-            <View style={styles.demoBanner}>
+            {/* <View style={styles.demoBanner}>
               <Text style={styles.demoText}>
                 DEMO ONLY. Use a test card such as 4111 1111 1111 1111 (Visa) or
                 5555 5555 5555 4444 (Mastercard) and fake billing details. Only the
                 brand, last 4 digits, expiry and billing details are kept. The full
                 number and security code are discarded.
               </Text>
-            </View>
+            </View> */}
 
             <View style={styles.methodRow}>
               {(['Visa', 'Mastercard'] as Method[]).map((m) => (
