@@ -23,6 +23,7 @@ import EmergencyContactsScreen from './screens/EmergencyContactsScreen';
 import EditProfileScreen from './screens/EditProfileScreen';
 import GuardHomeScreen from './screens/GuardHomeScreen';
 import GuardAlertsScreen from './screens/GuardAlertsScreen';
+import GuardProfileScreen from './screens/GuardProfileScreen';
 import GuardActiveAlertScreen from './screens/GuardActiveAlertScreen';
 import AlertDetail from './screens/AlertDetail';
 import ReportActivityScreen from './screens/ReportActivityScreen';
@@ -163,6 +164,7 @@ export default function App() {
             <>
               <Stack.Screen name="GuardHome" component={GuardHomeScreen} />
               <Stack.Screen name="GuardAlerts" component={GuardAlertsScreen} />
+              <Stack.Screen name="GuardProfile" component={GuardProfileScreen} />
               <Stack.Screen
                 name="GuardActiveAlert"
                 component={GuardActiveAlertScreen}

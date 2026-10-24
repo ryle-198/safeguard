@@ -8,7 +8,7 @@ import { colors, spacing, typography } from '../theme/tokens';
 type GuardNav = NativeStackNavigationProp<RootStackParamList>;
 
 interface Props {
-  active: 'Home' | 'Alerts';
+  active: 'Home' | 'Alerts' | 'Profile';
 }
 
 /**
@@ -16,7 +16,7 @@ interface Props {
  *
  * We don't reuse the resident BottomNavBar here because it's wired to
  * resident-only route names (Home, Profile, etc). This is intentionally
- * minimal - just Home / Alerts - matching the two guard screens that
+ * minimal - Home / Alerts / Profile - matching the guard screens that
  * currently exist.
  */
 export default function GuardBottomNavBar({ active }: Props) {
@@ -49,6 +49,20 @@ export default function GuardBottomNavBar({ active }: Props) {
           ]}
         >
           Alerts
+        </Text>
+      </Pressable>
+
+      <Pressable
+        style={styles.tab}
+        onPress={() => navigation.navigate('GuardProfile')}
+      >
+        <Text
+          style={[
+            styles.label,
+            active === 'Profile' && styles.labelActive,
+          ]}
+        >
+          Profile
         </Text>
       </Pressable>
     </View>

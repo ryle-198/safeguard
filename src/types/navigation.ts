@@ -26,6 +26,7 @@ export type RootStackParamList = {
   // Guard
   GuardHome: undefined;
   GuardAlerts: undefined;
+  GuardProfile: undefined;
   GuardActiveAlert: {
     alertId: string;
   };
